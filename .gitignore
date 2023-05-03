@@ -1,0 +1,16 @@
+# PyCharm files
+.idea/
+
+# Virtual environments
+.venv/
+.env
+shop/media/
+
+# PyEnv
+.python-version
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache
