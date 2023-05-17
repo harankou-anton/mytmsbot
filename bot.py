@@ -1,5 +1,9 @@
 # bot.py
 import os
+import random
+
+import aioredis
+
 
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler
@@ -7,10 +11,12 @@ import logging
 
 from telegram.ext.filters import TEXT
 
+redis = aioredis.from_url("redis://localhost")
 logging.basicConfig(level=logging.INFO)
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 logger = logging.getLogger(__name__)
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await redis.lpush("chats_correct", update.effective_chat.id)
     logger.info(
         f'Chat ID: {update.effective_chat.id}'
         f'User: {update.effective_user.first_name}'
